@@ -1,42 +1,34 @@
 var express = require("express");
 var app = express();
-var url = require("url");
 
-
-app.get("/", function(req,res){
-   res.setHeader("Content-Type","text/plain");
-   res.send("Bonjour, vous êtes à l'accueil");
+app.get("/",function(req,res){
+   res.setHeader("Content-Type", "text/plain");
+   res.send("Vous êtes l'accueil");
 
 });
 
-app.get("/cave", function(req,res){
-   res.setHeader("Content-Type","text/plain");
-   res.send("Bonjour, vous êtes dans la cave à vin");
-
-});
-
-app.get("/cave/sous-sol", function(req,res){
+app.get("/sous-sol",function(req,res){
    res.setHeader("Content-Type", "text/plain");
    res.send("Bonjour, vous êtes dans le sous-sol");
 
 });
 
-/* app.get("/cave/sous-sol/:chambre", function(req,res){
-   res.setHeader("Content-Type","text-plain");
-   res.end("Bonjour, vous êtes au sous-sol dans la "+req.params.chambre);
+/* app.get("/etage/1/chambre",function(req,res){
+   res.setHeader("Content-Type","text/plain");
+   res.send("Hé ho, c'est privé ici!!");
 
 }); */
 
-app.get("/cave/sous-sol/:chambre", function(req,res){
-   res.render("chambre.ejs",{etage: req.params.cave});
 
+
+
+app.get('/etage/:etagenum/chambre', function(req, res) {
+   res.render('chambre.ejs', {etage: req.params.etagenum});
 });
 
-app.use(function(req,res,next){
+app.use(function(req,res,next) {
    res.setHeader("Content-Type","text/plain");
-   res.status(400).send("Page introuvable");
+   res.status(404).send("Page introuvable");
 
 });
-
 app.listen(8080);
-
