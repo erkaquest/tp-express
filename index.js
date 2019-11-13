@@ -26,6 +26,12 @@ app.get('/etage/:etagenum/chambre', function(req, res) {
    res.render('chambre.ejs', {etage: req.params.etagenum});
 });
 
+app.get("/compter/:nombre",function(req,res){
+   var noms = ["Robert","Jacque","Marcel"];
+   res.render("page.ejs",{nombre : req.params.nombre, noms : noms})
+
+});
+
 app.use(function(req,res,next) {
    res.setHeader("Content-Type","text/plain");
    res.status(404).send("Page introuvable");
